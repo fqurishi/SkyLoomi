@@ -22,20 +22,20 @@ class SkyLoomi:
     # add frames
     addSongFrame = Frame(mainWindow)
     listBoxFrame = Frame(mainWindow)
-    # add widgets that need to be created independently
-    song_list = Listbox(listBoxFrame, width=100)
-    volume = Scale(listBoxFrame, from_=10, to=0)
     # create strings
     path = StringVar()
     song = StringVar()
+    # add widgets that need to be created independently
+    song_list = Listbox(listBoxFrame, width=100)
+    volume = Scale(listBoxFrame, from_=10, to=0)
+    path_field = Entry(addSongFrame, textvariable=path, width=60)
+    song_field = Entry(addSongFrame, width=15)
     current_song = ""
     # linked list for songs
     song_linked_list = Algorithms.LinkedList()
 
     def __init__(self):
         # initialize
-        self.path_field = None
-        self.song_field = None
         self.pack_frames()
         self.create_buttons()
         self.path.set('')
@@ -53,8 +53,6 @@ class SkyLoomi:
     def create_buttons(self):
         song_title = Label(self.addSongFrame, text="Song Name:")
         song_location = Label(self.addSongFrame, text="Song Location:")
-        path_field = Entry(self.addSongFrame, textvariable=self.path, width=60)
-        song_field = Entry(self.addSongFrame, width=15)
         browse_button = Button(self.addSongFrame, text="Browse", command=lambda: self.enter_path(), width=5)
         add_button = Button(self.addSongFrame, text="Add", command=lambda: self.add_song(), width=5)
         delete_button = Button(self.listBoxFrame, text="Delete", command=lambda: self.delete_song())
@@ -63,8 +61,8 @@ class SkyLoomi:
         next_button = Button(mainWindow, text="Next", command=lambda: self.next_song())
         song_title.grid(row=1, column=0)
         song_location.grid(row=1, column=2)
-        path_field.grid(row=1, column=3)
-        song_field.grid(row=1, column=1)
+        self.path_field.grid(row=1, column=3)
+        self.song_field.grid(row=1, column=1)
         browse_button.grid(row=1, column=4)
         add_button.grid(row=1, column=5)
         self.volume.pack(side=LEFT)
